@@ -149,7 +149,4 @@ class TileUploader:
             for child, child_id in zip(qtree.children, child_ids):
                 self.recurse(child, child_id)
                 if child_id in self.metadata:
-                    if child_id in self.metadata:
-                        self.metadata[tile_id]["children"].append(
-                            self.metadata[child_id]
-                        )
+                    self.metadata[tile_id]["children"].append(self.metadata[child_id])

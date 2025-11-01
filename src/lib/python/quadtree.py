@@ -128,7 +128,7 @@ class QuadTree:
                 seen.add(i)
                 real_sample.append(items[i])
 
-        # If we’re short, fill up with random unused points (shouldn't happen)
+        # If we’re short, fill up with random unused points (if multiple synthetics snap to the same real point)
         if len(real_sample) < self.MAX_TILE_POINTS:
             all_indices = set(range(len(items)))
             unused = list(all_indices - seen)

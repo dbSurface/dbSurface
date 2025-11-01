@@ -327,7 +327,7 @@ def embed_to_2d_helper(
         out += n
 
     bytes_per_vec = dim * 4 + n_neighbors * 8
-    n_clusters = max(1, math.ceil((bytes_per_vec * num_rows) / target_gpu_mem))
+    n_clusters = max(1, math.ceil((bytes_per_vec * num_rows) / target_gpu_mem)) # build knn graph in stages (1M rows 1 stage, 3M 2 stages)
     print("number of clusters", n_clusters)
 
     umap = UMAP(
@@ -363,7 +363,7 @@ def embed_to_2d_helper(
 
     print("UMAP done")
     if num_rows > 100_000:
-        pct_low, pct_high = 0.07, 99.3
+        pct_low, pct_high = 0.07, 99.93
     elif num_rows > 10_000:
         pct_low, pct_high = 0.3, 99.7
     elif num_rows > 1_000:
