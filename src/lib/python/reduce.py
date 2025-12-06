@@ -296,7 +296,7 @@ def run_wave(shard_ids, wave_size, const_kw):
     """
     failed, ok = [], 0
 
-    for i in range(0, len(shard_ids), wave_size):
+    for i in range(0, len(shard_ids), wave_size): #process wave_size ids at a time
         batch = shard_ids[i : i + wave_size]
         results = list(
             fetch_table.map(

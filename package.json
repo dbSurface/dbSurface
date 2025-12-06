@@ -57,7 +57,7 @@
     "jwks-rsa": "^3.2.0",
     "lucide-react": "^0.469.0",
     "monaco-editor": "^0.52.2",
-    "next": "^15.2.4",
+    "next": "^15.2.6",
     "pg": "^8.14.0",
     "pg-copy-streams": "^6.0.6",
     "postgres": "^3.4.5",

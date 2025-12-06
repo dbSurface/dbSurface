@@ -196,7 +196,7 @@ def fetch_table_helper(
     ) TO STDOUT (FORMAT BINARY)
 """
     with pg.cursor() as cur, cur.copy(copy_sql, (total_shards, shard_id)) as cp:
-        cp.set_types(list(udt_names))
+        cp.set_types(list(udt_names)) # let's cp deseriealize rows correctly
         MAX_ROWS = 1000
         MAX_BYTES = 16 * 1024**2  # 16mb
 
@@ -315,7 +315,7 @@ def embed_to_2d_helper(
     mmap_path = tmp.name
     tmp.close()
 
-    mmap = np.memmap(mmap_path, dtype=np.float32, mode="w+", shape=(num_rows, dim))
+    mmap = np.memmap(mmap_path, dtype=np.float32, mode="w+", shape=(num_rows, dim)) #like a numpy array but on disk
 
     out = 0
     for batch in ds_obj.scanner(
@@ -338,7 +338,7 @@ def embed_to_2d_helper(
         output_type="numpy",
     )
     # X_low = umap.fit_transform(mmap, data_on_host=True).astype(np.float32)
-    ctx = mp.get_context("spawn")
+    ctx = mp.get_context("spawn") # new python interpreter
     tmp_out = tempfile.NamedTemporaryFile(suffix=".npy", delete=False)
     tmp_out.close()
 
